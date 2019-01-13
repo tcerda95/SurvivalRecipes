@@ -4,9 +4,6 @@
   "description": "A simple starter to get up and developing quickly with Gatsby",
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
-  "engines": { 
-    "node": ">=9.0.0" 
-  },
   "husky": {
     "hooks": {
       "pre-commit": "npm run format"
