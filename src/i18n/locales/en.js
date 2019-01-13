@@ -2,9 +2,7 @@ module.exports = {
   title: 'Gatsby English',
   hello: 'Hi people',
   welcome: 'Welcome to your new Gatsby site.',
-  gopage2: 'Go to page 2',
   build: 'Now go build something great.',
   builtWith: 'built with',
-  welcome2: 'Welcome to page 2',
-  goback: 'Go back to the homepage'
+  notFoundText: 'You just hit a route that does not exist... the sadness.'
 };

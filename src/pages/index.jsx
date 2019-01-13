@@ -3,9 +3,8 @@ import { graphql } from 'gatsby';
 import { FormattedMessage } from 'react-intl';
 import { withIntl, Link } from '../i18n';
 
-import Layout from '../components/layout';
-import Image from '../components/image';
-import SEO from '../components/seo';
+import Layout from '../components/Layout';
+import SEO from '../components/SEO';
 
 const IndexPage = ({ data }) => (
   <Layout>
@@ -19,16 +18,12 @@ const IndexPage = ({ data }) => (
     <p>
       <FormattedMessage id="build" />
     </p>
-    <div style={{ maxWidth: '300px', marginBottom: '1.45rem' }}>
-      <Image />
-    </div>
-    <Link to="/page-2">
-      <FormattedMessage id="gopage2" />
-    </Link>
     {data.allMarkdownRemark.edges.map(({ node }) => (
-      <Link key={node.frontmatter.path} to={node.frontmatter.path}>
-        {node.frontmatter.title}
-      </Link>
+      <div>
+        <Link key={node.frontmatter.path} to={node.frontmatter.path}>
+          {node.frontmatter.title}
+        </Link>
+      </div>
     ))}
   </Layout>
 );

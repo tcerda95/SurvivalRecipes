@@ -4,7 +4,7 @@ const { languages } = require('./src/i18n/locales');
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
-  const postTemplate = path.resolve('src/templates/blogPost.js');
+  const postTemplate = path.resolve('src/templates/RecipePost.jsx');
 
   const result = await graphql(`
     {
@@ -40,7 +40,7 @@ exports.createPages = async ({ graphql, actions }) => {
 exports.onCreatePage = async ({ page, actions }) => {
   const { createPage, deletePage } = actions;
 
-  if (page.path.includes('404') || page.context.locale) {
+  if (page.context.locale) {
     return;
   }
 

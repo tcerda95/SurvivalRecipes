@@ -1,8 +1,7 @@
 ---
-title: "Pie"
-date: "2017-08-10"
-locale: "en"
-path: "/recipes/pie"
+title: 'Pie'
+locale: 'en'
+path: '/recipes/pie'
 ---
 
 # Pie

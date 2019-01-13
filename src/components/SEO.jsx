@@ -24,7 +24,7 @@ export default class SEO extends Component {
     const { description, title, meta, keywords } = this.props;
     const { language } = this.context;
     const lang = language.locale || language.detected;
-        
+
     return (
       <StaticQuery
         query={detailsQuery}
@@ -82,7 +82,7 @@ export default class SEO extends Component {
           );
         }}
       />
-    );    
+    );
   }
 }
 

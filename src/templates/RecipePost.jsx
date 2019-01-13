@@ -1,9 +1,9 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { withIntl } from '../i18n';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 
-const BlogPost = ({ data }) => {
+const RecipePost = ({ data }) => {
   const post = data.markdownRemark;
 
   return (
@@ -23,4 +23,4 @@ export const query = graphql`
   }
 `;
 
-export default withIntl(BlogPost);
+export default withIntl(RecipePost);
