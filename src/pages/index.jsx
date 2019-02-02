@@ -19,10 +19,8 @@ const IndexPage = ({ data }) => (
       <FormattedMessage id="build" />
     </p>
     {data.allMarkdownRemark.edges.map(({ node }) => (
-      <div>
-        <Link key={node.frontmatter.path} to={node.frontmatter.path}>
-          {node.frontmatter.title}
-        </Link>
+      <div key={node.frontmatter.path}>
+        <Link to={node.frontmatter.path}>{node.frontmatter.title}</Link>
       </div>
     ))}
   </Layout>
