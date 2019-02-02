@@ -1,10 +1,11 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
 import Header from './Header';
 import GlobalStyle from './GlobalStyle';
+import Themer from './Themer';
 
 const Container = styled.div`
   margin: 0 auto;
@@ -13,29 +14,49 @@ const Container = styled.div`
   padding-top: 0;
 `;
 
-const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
+export default class Layout extends Component {
+  static propTypes = {
+    children: PropTypes.node.isRequired
+  };
+
+  state = {
+    theme: Themer.getTheme()
+  };
+
+  handleThemeChange = () => {
+    const newTheme = Themer.switchTheme();
+
+    this.setState({ theme: newTheme });
+  };
+
+  render() {
+    const { children } = this.props;
+    const { theme } = this.state;
+
+    return (
+      <StaticQuery
+        query={graphql`
+          query SiteTitleQuery {
+            site {
+              siteMetadata {
+                title
+              }
+            }
           }
-        }
-      }
-    `}
-    render={data => (
-      <Fragment>
-        <GlobalStyle />
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <Container>{children}</Container>
-      </Fragment>
-    )}
-  />
-);
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired
-};
-
-export default Layout;
+        `}
+        render={data => (
+          <ThemeProvider theme={theme}>
+            <Fragment>
+              <GlobalStyle />
+              <Header
+                siteTitle={data.site.siteMetadata.title}
+                onThemeChange={this.handleThemeChange}
+              />
+              <Container>{children}</Container>
+            </Fragment>
+          </ThemeProvider>
+        )}
+      />
+    );
+  }
+}
