@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { StaticQuery, graphql } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
 
 import Header from './Header';
@@ -13,26 +13,25 @@ const Container = styled.div`
   padding-top: 0;
 `;
 
-const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
+const Layout = ({ children }) => {
+  const { site } = useStaticQuery(graphql`
+    query SiteTitleQuery {
+      site {
+        siteMetadata {
+          title
         }
       }
-    `}
-    render={data => (
-      <Fragment>
-        <GlobalStyle />
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <Container>{children}</Container>
-      </Fragment>
-    )}
-  />
-);
+    }
+  `);
+
+  return (
+    <Fragment>
+      <GlobalStyle />
+      <Header siteTitle={site.siteMetadata.title} />
+      <Container>{children}</Container>
+    </Fragment>
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired

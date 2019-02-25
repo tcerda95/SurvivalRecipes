@@ -8,7 +8,7 @@ const I18nLink = ({ to, children, ...rest }) => (
     {language => (
       <Link to={`/${language.locale}${to}`} {...rest}>
         {children}
-      </Link>        
+      </Link>
     )}
   </LanguageContext.Consumer>
 );
