@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
+import LanguageContext from '../i18n/LanguageContext';
 
 export default class SEO extends Component {
-  static contextTypes = {
-    language: PropTypes.object
-  };
+  static contextType = LanguageContext;
 
   static propTypes = {
     description: PropTypes.string,
@@ -22,7 +21,7 @@ export default class SEO extends Component {
 
   render() {
     const { description, title, meta, keywords } = this.props;
-    const { language } = this.context;
+    const language = this.context;
     const lang = language.locale || language.detected;
 
     return (

@@ -1,18 +1,18 @@
 // Example of how to change language
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import LanguageContext from '../i18n/LanguageContext';
 
 class Language extends Component {
-  static contextTypes = {
-    language: PropTypes.object
-  };
+  static contextType = LanguageContext;
 
   state = {
     value: ''
   };
 
   componentDidMount() {
-    const { language } = this.context;
+    const language = this.context;
+
     this.setState({
       value: language.locale || language.detected
     });

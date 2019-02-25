@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { IntlProvider, addLocaleData } from 'react-intl';
+import LanguageContext from './LanguageContext';
 import { localeData } from './locales';
 
 addLocaleData(localeData);
 
 export default ComposedComponent => {
   class withIntl extends Component {
-    static childContextTypes = {
-      language: PropTypes.object
-    };
-
     constructor(props) {
       super();
       const { pageContext } = props;
@@ -25,13 +21,6 @@ export default ComposedComponent => {
       };
     }
 
-    getChildContext() {
-      const { language } = this.state;
-      return {
-        language
-      };
-    }
-
     render() {
       const { language } = this.state;
       const locale = language.locale || 'en';
@@ -39,7 +28,9 @@ export default ComposedComponent => {
 
       return (
         <IntlProvider locale={locale} messages={messages}>
-          <ComposedComponent {...this.props} />
+          <LanguageContext.Provider value={language}>
+            <ComposedComponent {...this.props} />
+          </LanguageContext.Provider>
         </IntlProvider>
       );
     }
