@@ -40,7 +40,7 @@ exports.createPages = async ({ graphql, actions }) => {
 exports.onCreatePage = async ({ page, actions }) => {
   const { createPage, deletePage } = actions;
 
-  if (page.context.locale) {
+  if (page.path.includes('404') || page.context.locale) {
     return;
   }
 
