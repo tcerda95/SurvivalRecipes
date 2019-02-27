@@ -10,7 +10,7 @@ const Tab = styled.div`
 
 const Container = styled.div`
   margin: 0 auto;
-  maxwidth: 960;
+  max-width: 800px;
   padding: 1.45rem 1.0875rem;
 `;
 
