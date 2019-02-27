@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import { StaticQuery, graphql } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import styled, { ThemeProvider } from 'styled-components';
 
 import Header from './Header';
@@ -14,49 +14,37 @@ const Container = styled.div`
   padding-top: 0;
 `;
 
-export default class Layout extends Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired
-  };
+const Layout = ({ children }) => {
+  const { site } = useStaticQuery(graphql`
+    query SiteTitleQuery {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `);
 
-  state = {
-    theme: Themer.getTheme()
-  };
+  const [theme, setTheme] = useState(Themer.getTheme());
 
-  handleThemeChange = () => {
+  const handleThemeChange = () => {
     const newTheme = Themer.switchTheme();
-
-    this.setState({ theme: newTheme });
+    setTheme(newTheme);
   };
 
-  render() {
-    const { children } = this.props;
-    const { theme } = this.state;
+  return (
+    <ThemeProvider theme={theme}>
+      <Fragment>
+        <GlobalStyle />
+        <Header siteTitle={site.siteMetadata.title} onThemeChange={handleThemeChange} />
+        <Container>{children}</Container>
+      </Fragment>
+    </ThemeProvider>
+  );
+};
 
-    return (
-      <StaticQuery
-        query={graphql`
-          query SiteTitleQuery {
-            site {
-              siteMetadata {
-                title
-              }
-            }
-          }
-        `}
-        render={data => (
-          <ThemeProvider theme={theme}>
-            <Fragment>
-              <GlobalStyle />
-              <Header
-                siteTitle={data.site.siteMetadata.title}
-                onThemeChange={this.handleThemeChange}
-              />
-              <Container>{children}</Container>
-            </Fragment>
-          </ThemeProvider>
-        )}
-      />
-    );
-  }
-}
+Layout.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+export default Layout;

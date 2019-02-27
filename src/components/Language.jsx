@@ -1,18 +1,19 @@
 // Example of how to change language
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { navigate } from 'gatsby';
+import LanguageContext from '../i18n/LanguageContext';
 
 class Language extends Component {
-  static contextTypes = {
-    language: PropTypes.object
-  };
+  static contextType = LanguageContext;
 
   state = {
     value: ''
   };
 
   componentDidMount() {
-    const { language } = this.context;
+    const language = this.context;
+
     this.setState({
       value: language.locale || language.detected
     });
@@ -29,12 +30,12 @@ class Language extends Component {
 
     this.setState({ value }, () => {
       localStorage.setItem('language', value);
-      window.location.href = `/${value}${originalPath}`;
+      navigate(`/${value}${originalPath}`);
     });
   };
 
   render() {
-    const { language } = this.context;
+    const language = this.context;
     const { languages } = language;
     const { value } = this.state;
 

@@ -1,0 +1,8 @@
+{
+    "version": 2,
+    "name": "survivalrecipes",
+    "alias": "survivalrecipes",
+    "builds": [
+        { "src": "package.json", "use": "@now/static-build", "config": {"distDir": "public"} }
+    ]
+}
