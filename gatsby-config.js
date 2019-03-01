@@ -11,6 +11,7 @@ module.exports = {
     'gatsby-transformer-remark',
     'gatsby-plugin-styled-components',
     'gatsby-plugin-favicon',
+    'gatsby-plugin-catch-links',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
@@ -26,8 +27,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'pages',
-        path: `${__dirname}/src/pages`
+        name: 'recipes',
+        path: `${__dirname}/src/pages/recipes`
       }
     },
     {

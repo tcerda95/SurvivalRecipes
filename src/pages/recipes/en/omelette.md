@@ -6,4 +6,4 @@ path: '/recipes/omelette'
 
 # Omelette
 
-This in an English Omelette Recipe!
+English version work in progress! Check out the [spanish version](/es/recipes/omelette)!
