@@ -1,10 +1,11 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { FormattedMessage } from 'react-intl';
-import { withIntl, Link } from '../i18n';
 
+import { withIntl, Link } from '../i18n';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
+import { extractRecipePath } from '../../utils/pathParse';
 
 const IndexPage = ({ data }) => (
   <Layout>
@@ -18,11 +19,15 @@ const IndexPage = ({ data }) => (
     <p>
       <FormattedMessage id="build" />
     </p>
-    {data.allMarkdownRemark.edges.map(({ node }) => (
-      <div key={node.frontmatter.path}>
-        <Link to={node.frontmatter.path}>{node.frontmatter.title}</Link>
-      </div>
-    ))}
+    {data.allMarkdownRemark.edges.map(({ node }) => {
+      const path = extractRecipePath(node.fileAbsolutePath);
+
+      return (
+        <div key={node.frontmatter.path}>
+          <Link to={path}>{node.frontmatter.title}</Link>
+        </div>
+      );
+    })}
   </Layout>
 );
 
@@ -31,9 +36,9 @@ export const query = graphql`
     allMarkdownRemark(filter: { frontmatter: { locale: { eq: $locale } } }) {
       edges {
         node {
+          fileAbsolutePath
           frontmatter {
             title
-            path
           }
         }
       }

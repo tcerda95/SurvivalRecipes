@@ -1,7 +1,6 @@
 ---
 title: 'Omelette'
 locale: 'en'
-path: '/recipes/omelette'
 ---
 
 # Omelette

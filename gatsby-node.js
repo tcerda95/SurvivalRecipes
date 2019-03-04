@@ -1,3 +1,4 @@
+const { extractRecipePath } = require('./utils/pathParse');
 const path = require('path');
 const { languages } = require('./src/i18n/locales');
 
@@ -11,9 +12,9 @@ exports.createPages = async ({ graphql, actions }) => {
       allMarkdownRemark {
         edges {
           node {
+            fileAbsolutePath
             frontmatter {
               title
-              path
               locale
             }
           }
@@ -23,15 +24,17 @@ exports.createPages = async ({ graphql, actions }) => {
   `);
 
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    const recipePath = extractRecipePath(node.fileAbsolutePath);
+
     createPage({
-      path: `/${node.frontmatter.locale}${node.frontmatter.path}`,
+      path: `/${node.frontmatter.locale}${recipePath}`,
       component: postTemplate,
       context: {
         languages,
         title: node.frontmatter.title,
         locale: node.frontmatter.locale,
         routed: true,
-        originalPath: node.frontmatter.path
+        originalPath: recipePath
       }
     });
   });
