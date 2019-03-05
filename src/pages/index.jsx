@@ -6,7 +6,7 @@ import { withIntl, Link } from '../i18n';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import { extractRecipePath, extractRecipeDir } from '../../utils/pathParse';
-import recipeMetadata from './recipes/metadata.json';
+import recipesMetadata from './recipes/metadata.json';
 
 const IndexPage = ({ data }) => (
   <Layout>
@@ -23,7 +23,7 @@ const IndexPage = ({ data }) => (
     {data.allMarkdownRemark.edges.map(({ node }) => {
       const path = extractRecipePath(node.fileAbsolutePath);
       const recipe = extractRecipeDir(node.fileAbsolutePath);
-      const { ingredients } = recipeMetadata[recipe];
+      const { ingredients } = recipesMetadata[recipe];
 
       return (
         <div key={recipe}>
