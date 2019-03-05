@@ -5,7 +5,8 @@ import { FormattedMessage } from 'react-intl';
 import { withIntl, Link } from '../i18n';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
-import { extractRecipePath } from '../../utils/pathParse';
+import { extractRecipePath, extractRecipeDir } from '../../utils/pathParse';
+import recipeMetadata from './recipes/metadata.json';
 
 const IndexPage = ({ data }) => (
   <Layout>
@@ -21,14 +22,27 @@ const IndexPage = ({ data }) => (
     </p>
     {data.allMarkdownRemark.edges.map(({ node }) => {
       const path = extractRecipePath(node.fileAbsolutePath);
+      const recipe = extractRecipeDir(node.fileAbsolutePath);
+      const { ingredients } = recipeMetadata[recipe];
 
       return (
-        <div key={node.frontmatter.path}>
+        <div key={recipe}>
           <Link to={path}>{node.frontmatter.title}</Link>
+          <IngredientList ingredients={ingredients} />
         </div>
       );
     })}
   </Layout>
+);
+
+const IngredientList = ({ ingredients }) => (
+  <ul>
+    {ingredients.map(ingredient => (
+      <li key={ingredient}>
+        <FormattedMessage id={ingredient} />
+      </li>
+    ))}
+  </ul>
 );
 
 export const query = graphql`
