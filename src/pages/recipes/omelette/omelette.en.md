@@ -1,6 +1,5 @@
 ---
 title: 'Omelette'
-locale: 'en'
 ---
 
 # Omelette

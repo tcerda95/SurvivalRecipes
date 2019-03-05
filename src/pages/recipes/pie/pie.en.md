@@ -1,6 +1,5 @@
 ---
 title: 'Pie'
-locale: 'en'
 ---
 
 # Pie

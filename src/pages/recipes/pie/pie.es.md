@@ -1,6 +1,5 @@
 ---
 title: 'Tarta'
-locale: 'es'
 ---
 
 # Tarta

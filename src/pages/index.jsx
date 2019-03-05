@@ -5,8 +5,6 @@ import { FormattedMessage } from 'react-intl';
 import { withIntl, Link } from '../i18n';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
-import { extractRecipePath, extractRecipeDir } from '../../utils/pathParse';
-import recipesMetadata from './recipes/metadata.json';
 
 const IndexPage = ({ data }) => (
   <Layout>
@@ -20,18 +18,12 @@ const IndexPage = ({ data }) => (
     <p>
       <FormattedMessage id="build" />
     </p>
-    {data.allMarkdownRemark.edges.map(({ node }) => {
-      const path = extractRecipePath(node.fileAbsolutePath);
-      const recipe = extractRecipeDir(node.fileAbsolutePath);
-      const { ingredients } = recipesMetadata[recipe];
-
-      return (
-        <div key={recipe}>
-          <Link to={path}>{node.frontmatter.title}</Link>
-          <IngredientList ingredients={ingredients} />
-        </div>
-      );
-    })}
+    {data.allMarkdownRemark.edges.map(({ node }) => (
+      <div key={node.fields.id}>
+        <Link to={node.fields.path}>{node.frontmatter.title}</Link>
+        <IngredientList ingredients={node.fields.ingredients} />
+      </div>
+    ))}
   </Layout>
 );
 
@@ -47,12 +39,16 @@ const IngredientList = ({ ingredients }) => (
 
 export const query = graphql`
   query($locale: String!) {
-    allMarkdownRemark(filter: { frontmatter: { locale: { eq: $locale } } }) {
+    allMarkdownRemark(filter: { fields: { locale: { eq: $locale } } }) {
       edges {
         node {
-          fileAbsolutePath
           frontmatter {
             title
+          }
+          fields {
+            id
+            ingredients
+            path
           }
         }
       }

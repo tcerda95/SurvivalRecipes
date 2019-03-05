@@ -16,8 +16,8 @@ const RecipePost = ({ data }) => {
 };
 
 export const query = graphql`
-  query($locale: String!, $title: String!) {
-    markdownRemark(frontmatter: { locale: { eq: $locale }, title: { eq: $title } }) {
+  query($locale: String!, $id: String!) {
+    markdownRemark(fields: { locale: { eq: $locale }, id: { eq: $id } }) {
       html
     }
   }
