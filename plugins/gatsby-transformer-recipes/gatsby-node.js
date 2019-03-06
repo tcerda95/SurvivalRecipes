@@ -1,4 +1,9 @@
-const recipesMetadata = require('../../src/pages/recipes/metadata.json');
+const fs = require('fs');
+const util = require('util');
+
+const readFile = util.promisify(fs.readFile);
+
+const METADATA_FILENAME = 'metadata.json';
 
 exports.onCreateNode = async ({ node, actions }) => {
   const { createNodeField } = actions;
@@ -26,7 +31,8 @@ exports.onCreateNode = async ({ node, actions }) => {
       value: id
     });
 
-    const metadata = recipesMetadata[id];
+    const metadataPath = extractMetadataPath(fileAbsolutePath);
+    const metadata = JSON.parse(await readFile(metadataPath));
 
     for (const [name, value] of Object.entries(metadata)) {
       createNodeField({ node, name, value });
@@ -60,4 +66,12 @@ function extractRecipeFilename(absolutePath) {
 
   // len - 1 corresponds to filename, len - 2 is recipe directory
   return splitted[len - 1];  
+}
+
+function extractMetadataPath(absolutePath) {
+  const splitted = absolutePath.split('/');
+  const len = splitted.length;
+  const recipeDir = splitted.slice(0, len - 1).join('/');
+
+  return `${recipeDir}/${METADATA_FILENAME}`;
 }
