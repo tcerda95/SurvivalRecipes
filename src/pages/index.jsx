@@ -1,8 +1,8 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { FormattedMessage } from 'react-intl';
-import { withIntl, Link } from '../i18n';
 
+import { withIntl, Link } from '../i18n';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 
@@ -19,20 +19,35 @@ const IndexPage = ({ data }) => (
       <FormattedMessage id="build" />
     </p>
     {data.allMarkdownRemark.edges.map(({ node }) => (
-      <div key={node.frontmatter.path}>
-        <Link to={node.frontmatter.path}>{node.frontmatter.title}</Link>
+      <div key={node.fields.id}>
+        <Link to={node.fields.path}>{node.frontmatter.title}</Link>
+        <IngredientList ingredients={node.fields.ingredients} />
       </div>
     ))}
   </Layout>
 );
 
+const IngredientList = ({ ingredients }) => (
+  <ul>
+    {ingredients.map(ingredient => (
+      <li key={ingredient}>
+        <FormattedMessage id={ingredient} />
+      </li>
+    ))}
+  </ul>
+);
+
 export const query = graphql`
   query($locale: String!) {
-    allMarkdownRemark(filter: { frontmatter: { locale: { eq: $locale } } }) {
+    allMarkdownRemark(filter: { fields: { locale: { eq: $locale } } }) {
       edges {
         node {
           frontmatter {
             title
+          }
+          fields {
+            id
+            ingredients
             path
           }
         }

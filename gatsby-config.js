@@ -9,6 +9,7 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-transformer-remark',
+    'gatsby-transformer-recipes',
     'gatsby-plugin-styled-components',
     'gatsby-plugin-favicon',
     'gatsby-plugin-catch-links',

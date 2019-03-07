@@ -11,10 +11,10 @@ exports.createPages = async ({ graphql, actions }) => {
       allMarkdownRemark {
         edges {
           node {
-            frontmatter {
-              title
-              path
+            fields {
               locale
+              path
+              id
             }
           }
         }
@@ -24,14 +24,14 @@ exports.createPages = async ({ graphql, actions }) => {
 
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
-      path: `/${node.frontmatter.locale}${node.frontmatter.path}`,
+      path: `/${node.fields.locale}${node.fields.path}`,
       component: postTemplate,
       context: {
         languages,
-        title: node.frontmatter.title,
-        locale: node.frontmatter.locale,
-        routed: true,
-        originalPath: node.frontmatter.path
+        id: node.fields.id,
+        locale: node.fields.locale,
+        originalPath: node.fields.path,
+        routed: true
       }
     });
   });
