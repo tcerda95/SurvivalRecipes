@@ -1,5 +1,6 @@
 ---
 title: 'Omelette'
+synopsis: 'Nutritivo, rápido, sabroso y da lugar a la originalidad. ¿Qué más querés?'
 ---
 
 # Omelette
