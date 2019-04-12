@@ -7,6 +7,12 @@ export function nodeToRecipe(node) {
       ...recipe,
       ...node.fields
     };
+
+    // If cover image retrieved, replace cover node by the cover image itself
+    if (node.fields.cover) {
+      const childImageSharp = node.fields.cover.childImageSharp;
+      recipe.cover = childImageSharp.fixed || childImageSharp.fluid;
+    }
   }
 
   return recipe;

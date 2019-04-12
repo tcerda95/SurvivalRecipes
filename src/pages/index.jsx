@@ -31,6 +31,13 @@ export const query = graphql`
             id
             ingredients
             path
+            cover {
+              childImageSharp {
+                fluid(maxWidth: 256) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
         }
       }

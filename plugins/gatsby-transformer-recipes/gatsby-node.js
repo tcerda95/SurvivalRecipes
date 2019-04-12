@@ -23,12 +23,16 @@ exports.onCreateNode = async ({ node, actions }) => {
       value: extractRecipeLocale(fileAbsolutePath)
     });
 
-    const id = extractRecipeId(fileAbsolutePath);
+    createNodeField({
+      node,
+      name: 'cover',
+      value: './cover.jpg'
+    });
 
     createNodeField({
       node,
       name: 'id',
-      value: id
+      value: extractRecipeId(fileAbsolutePath)
     });
 
     const metadataPath = extractMetadataPath(fileAbsolutePath);
