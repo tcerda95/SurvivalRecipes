@@ -12,7 +12,6 @@ El Omelette es perfecto para zafar de forma rápida y nutritiva, además de pote
 ## ¿Qué necesito?
 
 * Sarten
-* Aceite
 * Manteca
 * Sal fina
 * Agua

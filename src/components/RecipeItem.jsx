@@ -17,7 +17,7 @@ const Item = styled.li`
   }
 `;
 
-const FlexLink = styled(Link)`
+const LinkContainer = styled(Link)`
   display: flex;
   align-items: center;
 `;
@@ -28,58 +28,58 @@ const Cover = styled(Img)`
 
 const InfoSection = styled.div`
   flex: 3;
-  padding: 0 1em;
+  margin: 0 1em;
+
+  @media ${device.mobile} {
+    flex: 2;
+  }
 `;
 
 const Title = styled.h3`
   font-size: 1.8em;
-
-  @media ${device.tablet} {
-    font-size: 1.2em;
-  }
-
-  @media ${device.mobile} {
-    font-size: 0.8em;
-  }
-
   font-weight: 400;
   margin: 0;
+
+  @media ${device.mobile} {
+    font-size: 5.25vw;
+  }
 `;
 
 const Synopsis = styled.p`
   font-size: 1.1em;
-
-  @media ${device.tablet} {
-    font-size: 1em;
-  }
+  font-weight: 300;
 
   @media ${device.mobile} {
-    font-size: 0.5em;
+    font-size: 3.3vw;
+    margin: 0.75em 0 1em 0;
   }
-  font-weight: 300;
 `;
 
 const RecipeItem = ({ recipe }) => {
-  const { title, synopsis, ingredients } = recipe;
+  const { path, cover, title, synopsis, ingredients } = recipe;
 
   return (
     <Item>
-      <FlexLink to={recipe.path}>
-        <Cover fluid={recipe.cover} />
+      <LinkContainer to={path}>
+        <Cover fluid={cover} />
         <InfoSection>
           <Title>{title}</Title>
           <Synopsis>{synopsis}</Synopsis>
           <IngredientsList ingredients={ingredients} />
         </InfoSection>
-      </FlexLink>
+      </LinkContainer>
     </Item>
   );
 };
 
 RecipeItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  synopsis: PropTypes.string.isRequired,
-  ingredients: PropTypes.array.isRequired
+  recipe: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+    cover: PropTypes.object.isRequired,
+    title: PropTypes.string.isRequired,
+    synopsis: PropTypes.string.isRequired,
+    ingredients: PropTypes.array.isRequired
+  })
 };
 
 export default RecipeItem;
@@ -89,19 +89,14 @@ const List = styled.ul`
 
   & > li {
     font-size: 0.95em;
-
-    @media ${device.tablet} {
-      font-size: 0.8em;
-    }
-
-    @media ${device.mobile} {
-      font-size: 0.45em;
-    }
-
     font-weight: 300;
     margin-right: 1em;
     color: #868e96;
     text-transform: capitalize;
+
+    @media ${device.mobile} {
+      font-size: 2.75vw;
+    }
   }
 
   & > li:last-child {
