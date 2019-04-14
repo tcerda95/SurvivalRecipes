@@ -3,12 +3,16 @@ import React from 'react';
 import { Link } from '../i18n';
 import styled from 'styled-components';
 
+import Themer from './Themer';
+
 const Tab = styled.div`
-  background: rebeccapurple;
+  background: ${props => props.theme.primary};
   margin-bottom: 1.45rem;
 `;
 
 const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
   margin: 0 auto;
   max-width: 800px;
   padding: 1.45rem 1.0875rem;
@@ -22,18 +26,20 @@ const StyledLink = styled(Link)`
   color: white;
 `;
 
-const Header = ({ siteTitle }) => (
+const Header = ({ siteTitle, onThemeChange }) => (
   <Tab>
     <Container>
       <Title>
         <StyledLink to="/">{siteTitle}</StyledLink>
       </Title>
+      <input type="checkbox" name="theme" checked={Themer.isDark()} onChange={onThemeChange} />
     </Container>
   </Tab>
 );
 
 Header.propTypes = {
-  siteTitle: PropTypes.string
+  siteTitle: PropTypes.string,
+  onThemeChange: PropTypes.func.isRequired
 };
 
 Header.defaultProps = {

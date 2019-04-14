@@ -1,10 +1,11 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, useStaticQuery } from 'gatsby';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
 import Header from './Header';
 import GlobalStyle from './GlobalStyle';
+import Themer from './Themer';
 
 const Container = styled.div`
   margin: 0 auto;
@@ -24,12 +25,21 @@ const Layout = ({ children }) => {
     }
   `);
 
+  const [theme, setTheme] = useState(Themer.getTheme());
+
+  const handleThemeChange = () => {
+    const newTheme = Themer.switchTheme();
+    setTheme(newTheme);
+  };
+
   return (
-    <Fragment>
-      <GlobalStyle />
-      <Header siteTitle={site.siteMetadata.title} />
-      <Container>{children}</Container>
-    </Fragment>
+    <ThemeProvider theme={theme}>
+      <Fragment>
+        <GlobalStyle />
+        <Header siteTitle={site.siteMetadata.title} onThemeChange={handleThemeChange} />
+        <Container>{children}</Container>
+      </Fragment>
+    </ThemeProvider>
   );
 };
 
