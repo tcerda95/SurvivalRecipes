@@ -1,5 +1,6 @@
 ---
 title: 'Omelette'
+synopsis: 'Omelette is lovely'
 ---
 
 # Omelette

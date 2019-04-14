@@ -1,5 +1,6 @@
 ---
 title: 'Omelette'
+synopsis: 'Nutritivo, rápido, sabroso y da lugar a la originalidad. ¿Qué más querés?'
 ---
 
 # Omelette
@@ -11,7 +12,6 @@ El Omelette es perfecto para zafar de forma rápida y nutritiva, además de pote
 ## ¿Qué necesito?
 
 * Sarten
-* Aceite
 * Manteca
 * Sal fina
 * Agua
