@@ -29,4 +29,39 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
   }
+
+  input,
+  label,
+  select,
+  button,
+  textarea {
+    margin:0;
+    border:0;
+    padding:0;
+    display:inline-block;
+    vertical-align:middle;
+    white-space:normal;
+    background:none;
+    line-height:1;
+    
+    /* Browsers have different default form fonts */
+    font-size:13px;
+    font-family:Arial;
+  }
+
+  /* Remove the stupid outer glow in Webkit */
+  input:focus {
+    outline:0;
+  }
+
+  /* Box Sizing Reset
+  -----------------------------------------------*/
+
+  /* All of our custom controls should be what we expect them to be */
+  input,
+  textarea {
+    -webkit-box-sizing:content-box;
+    -moz-box-sizing:content-box;
+    box-sizing:content-box;
+  }
 `;

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { graphql, useStaticQuery } from 'gatsby';
-import LanguageContext from '../i18n/LanguageContext';
+import { LanguageContext } from '../i18n';
 
 const SEO = ({ description, title, meta, keywords }) => {
   const language = useContext(LanguageContext);
