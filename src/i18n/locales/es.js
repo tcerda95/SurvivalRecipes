@@ -1,9 +1,8 @@
 module.exports = {
   title: 'Gatsby Español',
-  hello: 'Buenos días',
-  welcome: 'Bienvenidos al nuevo sitio de Gatsby.',
-  build: 'Ve a contruir algo grandioso.',
-  builtWith: 'construido con',
+
+  searchPlaceholder: '¡Buscala acá!',
+  recipeListHeaderText: "Elegí una receta y comé en 30' sin salir de tu casa",
 
   oil: 'aceite',
   butter: 'manteca',
